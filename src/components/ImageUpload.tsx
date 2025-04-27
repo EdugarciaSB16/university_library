@@ -4,6 +4,7 @@ import ImageKit from "imagekit";
 import { IKImage, IKUpload, ImageKitProvider } from "imagekitio-next";
 import { useRef, useState } from "react";
 import Image from "next/image";
+import { toast } from "@/hooks/use-toast";
 
 const {
   env: {
@@ -47,11 +48,21 @@ const ImageUpload = ({
 
   const onError = (error: any) => {
     console.error(error);
+    toast({
+      title: "Image upload failed",
+      description: `An error occurred while uploading the image.`,
+      variant: "destructive",
+    });
   };
 
   const onSuccess = (response: any) => {
     setFile(response);
     onFileChange(response.filePath);
+
+    toast({
+      title: "Image uploaded successfully",
+      description: `${response.filePath} has been successfully uploaded.`,
+    });
   };
 
   return (
@@ -93,7 +104,7 @@ const ImageUpload = ({
           path={file.filePath}
           alt={file.filePath}
           width={500}
-          height={500}
+          height={300}
         />
       )}
     </ImageKitProvider>
