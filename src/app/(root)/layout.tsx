@@ -4,18 +4,18 @@ import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 
 const layout = async ({ children }: { children: ReactNode }) => {
-    const session = await auth();
+  const session = await auth();
 
-    if (!session) redirect('/sign-in');
+  if (!session) redirect('/sign-in');
 
-    return (
-        <main className="root-container">
-            <div className="mx-auto max-w-7xl">
-                <Header session={session} />
-                <div className="mt-20 pb-20">{children}</div>
-            </div>
-        </main>
-    );
+  return (
+    <main className="root-container">
+      <div className="mx-auto max-w-7xl">
+        <Header session={session} />
+        <div className="mt-20 pb-20">{children}</div>
+      </div>
+    </main>
+  );
 };
 
 export default layout;

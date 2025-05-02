@@ -1,7 +1,7 @@
-import { Book } from "@/types";
-import Image from "next/image";
-import BookCover from "./BookCover";
-import { Button } from "./ui/button";
+import { Book } from '@/types';
+import Image from 'next/image';
+import BookCover from './BookCover';
+import { Button } from './ui/button';
 
 interface Props extends Book {}
 
@@ -25,7 +25,7 @@ const BookOverview: React.FC<Props> = ({
             By <span className="font-semibold text-light-200">{author}</span>
           </p>
           <p>
-            Category{" "}
+            Category{' '}
             <span className="font-semibold text-light-200">{genre}</span>
           </p>
           <div className="flex flex-row gap-1">

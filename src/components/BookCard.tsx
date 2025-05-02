@@ -1,10 +1,10 @@
-import Link from "next/link";
-import React from "react";
-import BookCover from "./BookCover";
-import { Book } from "@/types";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { Button } from "./ui/button";
+import Link from 'next/link';
+import React from 'react';
+import BookCover from './BookCover';
+import { Book } from '@/types';
+import { cn } from '@/lib/utils';
+import Image from 'next/image';
+import { Button } from './ui/button';
 
 const BookCard = ({
   id,
@@ -15,14 +15,14 @@ const BookCard = ({
   isLoanedBook = false,
 }: Book) => {
   return (
-    <li className={cn(isLoanedBook && "xs:w-52 w-full")}>
+    <li className={cn(isLoanedBook && 'xs:w-52 w-full')}>
       <Link
         href={`/books/${id}`}
-        className={cn(isLoanedBook && "w-full flex flex-col item-center")}
+        className={cn(isLoanedBook && 'w-full flex flex-col item-center')}
       >
         <BookCover coverColor={coverColor} coverImage={coverUrl} />
 
-        <div className={cn("mt-4", !isLoanedBook && "xs:max-w-40 max-w-28")}>
+        <div className={cn('mt-4', !isLoanedBook && 'xs:max-w-40 max-w-28')}>
           <p className="book-title">{title}</p>
           <p className="book-genre">{genre}</p>
         </div>

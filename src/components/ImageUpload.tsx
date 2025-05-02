@@ -1,10 +1,10 @@
-"use client";
-import config from "@/lib/config";
-import ImageKit from "imagekit";
-import { IKImage, IKUpload, ImageKitProvider } from "imagekitio-next";
-import { useRef, useState } from "react";
-import Image from "next/image";
-import { toast } from "@/hooks/use-toast";
+'use client';
+import config from '@/lib/config';
+import ImageKit from 'imagekit';
+import { IKImage, IKUpload, ImageKitProvider } from 'imagekitio-next';
+import { useRef, useState } from 'react';
+import Image from 'next/image';
+import { toast } from '@/hooks/use-toast';
 
 const {
   env: {
@@ -20,7 +20,7 @@ const authenticator = async () => {
       const errorText = await response.text();
 
       throw new Error(
-        `Request failed with status ${response.status}: ${errorText}`,
+        `Request failed with status ${response.status}: ${errorText}`
       );
     }
 
@@ -49,9 +49,9 @@ const ImageUpload = ({
   const onError = (error: any) => {
     console.error(error);
     toast({
-      title: "Image upload failed",
+      title: 'Image upload failed',
       description: `An error occurred while uploading the image.`,
-      variant: "destructive",
+      variant: 'destructive',
     });
   };
 
@@ -60,7 +60,7 @@ const ImageUpload = ({
     onFileChange(response.filePath);
 
     toast({
-      title: "Image uploaded successfully",
+      title: 'Image uploaded successfully',
       description: `${response.filePath} has been successfully uploaded.`,
     });
   };

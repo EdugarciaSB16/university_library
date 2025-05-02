@@ -1,17 +1,21 @@
-"use server";
-import { db } from "@/database/drizzle";
-import { users } from "@/database/schema";
-import { signIn } from "@/lib/auth";
-import { hash } from "bcryptjs";
-import { eq } from "drizzle-orm";
+'use server';
+import { db } from '@/database/drizzle';
+import { users } from '@/database/schema';
+import { signIn } from '@/lib/auth';
+import { AuthCredentials } from '@/types';
+import { hash } from 'bcryptjs';
+import { eq } from 'drizzle-orm';
+import { headers } from 'next/headers';
+import ratelimit from '../ratelimit';
+import { redirect } from 'next/navigation';
 
 export const signInWithCredentials = async (
-  params: Pick<AuthCredentials, "email" | "password">,
+  params: Pick<AuthCredentials, 'email' | 'password'>
 ) => {
   const { email, password } = params;
 
   try {
-    const result = await signIn("credentials", {
+    const result = await signIn('credentials', {
       redirect: false,
       email,
       password,
@@ -23,13 +27,19 @@ export const signInWithCredentials = async (
 
     return { success: true };
   } catch (error) {
-    console.error(error, "SignIn error");
-    return { success: false, error: "Failed to sign in" };
+    console.error(error, 'SignIn error');
+    return { success: false, error: 'Failed to sign in' };
   }
 };
 
 export const signUp = async (params: AuthCredentials) => {
   const { fullName, email, password, universityId, universityCard } = params;
+
+  const ip = (await headers()).get('x-forwarded-for') || '127.0.0.1';
+  const { success } = await ratelimit.limit(ip);
+
+  // Check if the user is rate limited
+  if (!success) return redirect('/too-fast');
 
   // Check if the user already exits
   const existingUser = await db
@@ -39,7 +49,7 @@ export const signUp = async (params: AuthCredentials) => {
     .limit(1);
 
   if (existingUser.length > 0) {
-    return { success: false, error: "User already exists" };
+    return { success: false, error: 'User already exists' };
   }
 
   const hashedPassword = await hash(password, 10);
@@ -59,7 +69,7 @@ export const signUp = async (params: AuthCredentials) => {
     });
     return { success: true };
   } catch (error) {
-    console.error(error, "SignUp error");
-    return { success: false, error: "Failed to create user" };
+    console.error(error, 'SignUp error');
+    return { success: false, error: 'Failed to create user' };
   }
 };

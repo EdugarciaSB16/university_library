@@ -1,11 +1,11 @@
-"use client";
-import Link from "next/link";
-import React from "react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { usePathname } from "next/navigation";
-import { cn, getInitials } from "@/lib/utils";
-import Image from "next/image";
-import { Session } from "next-auth";
+'use client';
+import Link from 'next/link';
+import React from 'react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { usePathname } from 'next/navigation';
+import { cn, getInitials } from '@/lib/utils';
+import Image from 'next/image';
+import { Session } from 'next-auth';
 
 const Header = ({ session }: { session: Session }) => {
   const pathname = usePathname();
@@ -21,8 +21,8 @@ const Header = ({ session }: { session: Session }) => {
           <Link
             href="/library"
             className={cn(
-              "text-base cursor-pointer capitalize",
-              pathname === "/library" ? "text-light-200" : "text-light-100",
+              'text-base cursor-pointer capitalize',
+              pathname === '/library' ? 'text-light-200' : 'text-light-100'
             )}
           >
             Library
@@ -32,7 +32,7 @@ const Header = ({ session }: { session: Session }) => {
           <Link href="/my-profile">
             <Avatar>
               <AvatarFallback className="bg-amber-100">
-                {getInitials(session?.user?.name || "IN")}
+                {getInitials(session?.user?.name || 'IN')}
               </AvatarFallback>
             </Avatar>
           </Link>
