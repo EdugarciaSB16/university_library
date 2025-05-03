@@ -34,6 +34,7 @@ const authenticator = async () => {
       expire,
     };
   } catch (error: any) {
+    console.error(error);
     throw new Error(`Authentication request failed: ${error.message}`);
   }
 };
