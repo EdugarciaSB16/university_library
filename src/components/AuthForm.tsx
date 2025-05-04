@@ -24,7 +24,7 @@ import {
   UseFormReturn,
 } from 'react-hook-form';
 import { ZodType } from 'zod';
-import ImageUpload from './FileUpload';
+import FileUpload from '@/components/FileUpload';
 
 type AuthFormResult = {
   success: boolean;
@@ -100,7 +100,14 @@ const AuthForm = <T extends FieldValues>({
                   </FormLabel>
                   <FormControl>
                     {field.name === 'universityCard' ? (
-                      <ImageUpload onFileChange={field.onChange} />
+                      <FileUpload
+                        type="image"
+                        accept="image/*"
+                        placeholder="Upload your ID"
+                        folder="ids"
+                        variant="dark"
+                        onFileChange={field.onChange}
+                      />
                     ) : (
                       <Input
                         required
