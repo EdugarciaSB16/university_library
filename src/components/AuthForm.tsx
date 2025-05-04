@@ -24,7 +24,7 @@ import {
   UseFormReturn,
 } from 'react-hook-form';
 import { ZodType } from 'zod';
-import ImageUpload from './ImageUpload';
+import ImageUpload from './FileUpload';
 
 type AuthFormResult = {
   success: boolean;
