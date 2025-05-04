@@ -1,5 +1,5 @@
 export interface Book {
-  id: number;
+  id: string;
   title: string;
   author: string;
   genre: string;
@@ -10,7 +10,8 @@ export interface Book {
   coverColor: string;
   coverUrl: string;
   videoUrl: string;
-  isLoanedBook?: boolean;
+  summary: string;
+  createdAt: Date | null;
 }
 
 export interface AuthCredentials {
