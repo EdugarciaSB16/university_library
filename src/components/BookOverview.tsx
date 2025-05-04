@@ -2,19 +2,22 @@ import { Book } from '@/types';
 import Image from 'next/image';
 import BookCover from './BookCover';
 import { Button } from './ui/button';
-
-interface Props extends Book {}
+interface Props extends Book {
+  userId: string;
+}
 
 const BookOverview: React.FC<Props> = ({
   title,
   author,
   genre,
   rating,
-  total_copies,
-  available_copies,
+  totalCopies,
+  availableCopies,
   description,
   coverColor,
   coverUrl,
+  id,
+  userId,
 }: Props) => {
   return (
     <section className="book-overview">
@@ -35,10 +38,10 @@ const BookOverview: React.FC<Props> = ({
         </div>
         <div className="book-copies">
           <p>
-            Total Books: <span>{total_copies}</span>
+            Total Books: <span>{totalCopies}</span>
           </p>
           <p>
-            Available Books: <span>{available_copies}</span>
+            Available Books: <span>{availableCopies}</span>
           </p>
           <p className="book-description">{description}</p>
           <Button className="book-overview_btn">
