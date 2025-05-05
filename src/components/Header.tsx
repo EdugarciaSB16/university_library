@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation';
 import { cn, getInitials } from '@/lib/utils';
 import Image from 'next/image';
 import { Session } from 'next-auth';
+import { TbLogout2 } from 'react-icons/tb';
+import { signOut } from 'next-auth/react';
 
 const Header = ({ session }: { session: Session }) => {
   const pathname = usePathname();
@@ -19,23 +21,41 @@ const Header = ({ session }: { session: Session }) => {
       <ul className="flex flex-row items-center gap-8">
         <li>
           <Link
+            href="/"
+            className={cn(
+              'text-base cursor-pointer capitalize',
+              pathname === '/library' ? 'text-light-200' : 'text-light-100'
+            )}
+          >
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link
             href="/library"
             className={cn(
               'text-base cursor-pointer capitalize',
               pathname === '/library' ? 'text-light-200' : 'text-light-100'
             )}
           >
-            Library
+            Search
           </Link>
         </li>
         <li>
-          <Link href="/my-profile">
+          <div>
             <Avatar>
               <AvatarFallback className="bg-amber-100">
                 {getInitials(session?.user?.name || 'IN')}
               </AvatarFallback>
             </Avatar>
-          </Link>
+          </div>
+        </li>
+        <li>
+          <TbLogout2
+            size={24}
+            className="text-red-600 cursor-pointer"
+            onClick={() => signOut()}
+          />
         </li>
       </ul>
     </header>
