@@ -7,6 +7,8 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Session } from 'next-auth';
+import { TbLogout2 } from 'react-icons/tb';
+import { signOut } from 'next-auth/react';
 
 const Sidebar = ({ session }: { session: Session }) => {
   const pathname = usePathname();
@@ -20,6 +22,7 @@ const Sidebar = ({ session }: { session: Session }) => {
             height={37}
             width={37}
           />
+          <span className="font-semibold">UniBooks</span>
         </div>
         <div className="mt-10 flex flex-col gap-5">
           {adminSideBarLinks.map((link) => {
@@ -62,6 +65,13 @@ const Sidebar = ({ session }: { session: Session }) => {
         <div className="flex flex-col max-md:hidden">
           <p className="font-semibold text-dark-200">{session?.user?.name}</p>
           <p className="text-xs text-light-500">{session?.user?.email}</p>
+        </div>
+        <div className="flex items-center">
+          <TbLogout2
+            size={20}
+            className="text-red-600 cursor-pointer"
+            onClick={() => signOut()}
+          />
         </div>
       </div>
     </div>
