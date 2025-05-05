@@ -34,3 +34,8 @@ export interface BookParams {
   videoUrl: string;
   summary: string;
 }
+
+export interface BorrowBookParams {
+  bookId: string;
+  userId: string;
+}
